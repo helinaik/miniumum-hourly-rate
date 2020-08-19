@@ -1,0 +1,32 @@
+body{
+    font-family: 'Work Sans', sans-serif;
+}
+
+.page-title{
+    padding: 150px 200px 10px 200px;
+    text-align: center;
+}
+
+.page-desc{
+    padding: 0px 100px;
+    text-align: center;
+}
+
+.steps{
+    padding: 20px 150px;
+}
+
+.stepCalc{
+    padding: 20px;
+    border: solid 1px;
+    border-radius: 5px;
+}
+
+.fields{
+    padding-bottom: 5px;
+}
+
+.inputText {
+    border: none;
+    border-bottom: 1px solid;
+}
