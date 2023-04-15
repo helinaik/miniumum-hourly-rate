@@ -10,7 +10,7 @@
       gtag('config', 'UA-113853450-8');
     </script>
 
-    <title>Find your minimum hourly rate</title>
+    <title id="title">Find your minimum hourly rate</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
@@ -18,10 +18,12 @@
 <body>
 
   <div class="container">
+    <div id="pdfContent">
     <div class="row">
         <div class="col-md-12 page-title">
         <a href="https://www.producthunt.com/posts/wyhr?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-wyhr" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=388730&theme=light" alt="WYHR - Find&#0032;your&#0032;minimum&#0032;hourly&#0032;rate | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
         </div>
+       
       <div class="col-md-12 page-title">
         <h1>Find your minimum hourly rate</h1>
       </div>
@@ -31,6 +33,7 @@
         <p>[You can fill up this in your suitable currency]</p>
       </div>
     </div>
+    
     <div class="row steps step1">
       <div class="col-md-1">
        
@@ -140,8 +143,15 @@
       <div class="col-md-1">
         <p></p>
       </div>
-
+     
     </div>
+</div>
+<div style="text-align: center;" class="pb-5">
+    <button id="cmd" >generate PDF</button>
+</div>
+<div style="text-align: center;" class="pb-5">
+    <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="heli" data-color="#FFDD00" data-emoji=""  data-font="Poppins" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</div>  
           <div class="row">
       <div class="col-md-12 text-center">
           <center><b>ABOUT ME</b></center>
@@ -165,7 +175,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-
+  
   <script>
     var yearlyExpense = 0;
     var workingWeeks = 0;
@@ -196,8 +206,29 @@
       $('#minimumRate').html((yearlyExpense/annualWorkingHours).toFixed(2));
 
     })
-
+$(document).ready(function(){
     
+        //generate PDF
+
+
+    $('#cmd').click(function () {
+        if($('#minimumRate').html()!=0 ){
+            var divContents = '<div class="col-md-12 page-title"><h1>Find your minimum hourly rate</h1></div><div class="row steps step1"><div class="col-md-1"></div><div class="col-md-10 stepCalc"><h4>Step 1 - Calculate your expense</h4><div class="fields"> <span>Your personal monthly expense:  </span><span><b>'+ parseFloat($("#personalExp").val())+'</b></span></div><div class="fields"><span>Your business monthly expense:  </span><span><b>'+ parseFloat($("#businessExp").val())+'</b></span></div><div class="fields"> <span>Your monthly savings:  </span><span><b>'+ parseFloat($("#savings").val())+'</b></span></div><div class="fields"> <span>Your monthly tax:  </span><span><b>'+ parseFloat($("#tax").val())+'</b></span></div><div> <span>Your yearly expense:  </span><span id="yearlyExpense"><b>'+ $("#yearlyExpense").html()+'</b></span></div></div><div class="col-md-1"><p></p></div></div><div class="row steps step2"><div class="col-md-1"><p></p></div><div class="col-md-10 stepCalc"><h4>Step 2 - Weeks off in a year(including holidays, sick leaves, weekends etc.)</h4><div class="fields"><span>Total weeks in a year:  </span><span id="totalWeeks"><b>52</b></span></div><div class="fields"> <span>Weeks off do you take:  </span><span><b>'+ parseFloat($("#workingWeeks").html())+'</b></span></div><span>Working weeks:  </span><span id="workingWeeks"><b>'+ $("#workingWeeksCalc").html()+'</b></span></div><div class="col-md-1"><p></p></div></div><div class="row steps step3"><div class="col-md-1"><p></p></div><div class="col-md-10 stepCalc"><h4>Step 3 - Weekly billable hours</h4><div class="fields"><span>Weekly billable hours:  </span><span><b>'+ parseFloat($("#billableHours").val())+'</b></span></div></div><div class="col-md-1"><p></p></div></div><div class="row steps step4"><div class="col-md-1"><p></p></div><div class="col-md-10 stepCalc"><h4>Step 4 - Annual working hours</h4><div class="fields"><span>Working weeks:  </span><span id="workingWeeksCalc"><b>'+ $("#workingWeeksCalc").html()+'</b></span></div><div class="fields"><span>Weekly billable hours:  </span><span id="billableHoursCalc"><b>'+parseFloat($("#billableHours").val())+'</b></span></div><span>Yearly working hours:  </span><span id="workingHours"><b>'+ $('#workingHours').html()+'</b></span></div><div class="col-md-1"><p></p></div></div><div class="row steps step5"><div class="col-md-1"><p></p></div><div class="col-md-10 stepCalc"><h4>Your minimun hourly rate is <span id="minimumRate"><b>'+ $('#minimumRate').html()+'</b></span></h4></div><div class="col-md-1"><p></p></div></div>';
+            var printWindow = window.open('', '', 'height=400,width=800');
+            printWindow.document.write('<html><head><title>DIV Contents</title>');
+            printWindow.document.write('</head><body >');
+            printWindow.document.write(divContents);
+            printWindow.document.write('</body></html>');
+            printWindow.document.close();
+            printWindow.print();
+        }
+        else{
+            alert("Please fill up all the values");
+        }
+
+    });
+})
+
 
   </script>
 
